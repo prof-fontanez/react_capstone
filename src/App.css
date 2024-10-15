@@ -2,37 +2,285 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+button {
+  display: block;
+  background-color: #F4CE14;
+  color: #333333;
+  width: 150px;
+  height: 48px;
+  border-width: 0em;
+  border-radius: 2.5%;
+  font-family: "Karla";
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.about {
+  display: flex;
+  font-size: 18px;
+  color: #333333;
+  font-family: "Karla";
+  width: 1440px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+}
+
+.about h1 {
+  font-family: "Markazi Text";
+  font-weight: 18;
+  font-size: 64px;
+  margin-left: 50%;
+  text-wrap: nowrap;
+}
+
+.about h2 {
+  font-family: "Markazi Text";
+  font-weight: normal;
+  font-size: 40px;
+  margin-left: 50%;
+  margin-bottom: 0px;
+  text-wrap: nowrap;
+}
+
+.about text {
+  display: flex;
+  margin-left: 50%;
+  width: 420px;
+  text-wrap: wrap;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  width: 400px;
+  aspect-ratio: inherit;
+  margin-left: 30%;
+}
+
+.banner {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-color: white;
+  flex-direction:row;
+  align-items: center;
+  width: 1440px;
+}
+
+.hero {
+  width: 1440px;
+  height: 700px;
+}
+
+.hero h2 {
+  display: inline;
+  font-family: "Markazi Text";
+  font-size: 40px;
+  font-weight: bold;
+  color: #333333;
+  margin-top: 7%;
+  margin-left: -10%;
+}
+
+.hero button {
+  display: inline;
+  margin-top: 50px;
+  margin-left: 25%;
+
+}
+
+.hero_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner li {
+  display: inline-block;
+  list-style-type: none;
+  color: black;
+  font-size: medium;
+}
+
+.banner a {
+  display: inline-block;
+  padding: auto;
+  margin: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+.banner img {
+  width: 240px;
+  height: 60px;
+  resize: both;
+  aspect-ratio: inherit;
+}
+
+.homepage {
+  background-color: #495E57;
+  font-size: 18px;
+  color: white;
+  font-family: "Karla";
+  width: 1440px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.homepage h2 {
+  font-family: "Markazi Text";
+  font-weight: normal;
+  font-size: 40px;
+  margin-left: 50%;
+  margin-bottom: 0px;
+  text-wrap: nowrap;
+}
+
+.homepage text {
+  display: flex;
+  margin-left: 50%;
+  width: 250px;
+  text-wrap: wrap;
+}
+
+.homepage button {
+  margin-left: 50%;
+  margin-top: 20px;
+}
+
+.homepage img {
+  border-radius: 5%;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 1440px;
+}
+
+.footer img {
+  max-height: auto;
+  max-width: 20%;
+}
+
+.footerlink {
+  list-style-type: none;
+}
+
+.picture {
+  margin-left: 35%;
+  display: inline-flex;
+  width: 350px;
+  height: 460px;
+}
+
+.homepage h1 {
+  font-family: "Markazi Text";
+  font-weight: 18;
+  color: #F4CE14;
+  font-size: 64px;
+  margin-left: 50%;
+  text-wrap: nowrap;
+}
+
+.testimonials {
+  background-color: #495E57;
+  font-size: 18px;
+  color: white;
+  font-family: "Karla";
+  width: 1440px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonials h2 {
+  font-family: "Markazi Text";
+  font-weight: bolder;
+  font-size: 40px;
+}
+
+.review {
+  display: inline-block;
+  background-color: #F4CE14;
+  width: 200px;
+  height: 175px;
+  color: #000000;
+  margin-right: 20px;
+  font-family: "Karla";
+}
+
+.review comment {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4; /* Also define the standard property 'line-clamp' for compatibility */
+  -webkit-box-orient: vertical;
+
+}
+
+.menuspecial {
+  display: inline-block;
+  background-color: #EDEFEE;
+  width:240px;
+  height: 440px;
+  margin-right: 5%;
+  border-radius: 5%;
+  align-items: center;
+  border-width: 0em;
+  border-style: solid;
+  box-shadow:  0px 1px darkslategray, 0 0 25px gray;
+  font-family: "Karla";
+}
+
+.menuspecial_img {
+  width: inherit;
+  height: 160px;
+  resize: both;
+  aspect-ratio: inherit;
+  border-radius: 5%;
+}
+
+.menuspecial text {
+   color: #333333;
+   font-size: 18px;
+   font-weight: bold;
+   margin-right: 5%;
+   margin-left: 10px;
+}
+
+.menuspecial textarea {
+  border: none;
+  margin-top: 5%;
+  font-size: 16;
+  color: #333333;
+  resize: none;
+  height: 150px;
+  width: 215px;
+  margin-left: 10px;
+  background-color: inherit;
+}
+
+.menuspecial price {
+  color: #EE9972;
+  font-size: medium;
+}
+
+.delivery_icon {
+  width: 25px;
+  height: 25px;
+  resize: both;
+  margin-left: 20%;
 }
