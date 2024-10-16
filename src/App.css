@@ -1,6 +1,16 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+/* body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+} */
 
 button {
   display: block;
@@ -52,6 +62,13 @@ button {
   margin-left: 50%;
   width: 420px;
   text-wrap: wrap;
+}
+
+.avatar {
+  display: inline-flex;
+  width: auto;
+  height: 175px;
+  resize: both;
 }
 
 .image {
@@ -108,7 +125,7 @@ button {
   font-size: medium;
 }
 
-.banner a {
+.link {
   display: inline-block;
   padding: auto;
   margin: 20px;
@@ -170,11 +187,17 @@ button {
 
 .footer img {
   max-height: auto;
-  max-width: 20%;
+  max-width: 40%;
+}
+
+.footerlist {
+  list-style-type: none;
 }
 
 .footerlink {
-  list-style-type: none;
+  display: flex;
+  text-decoration: none;
+  color: black;
 }
 
 .picture {
@@ -191,6 +214,17 @@ button {
   font-size: 64px;
   margin-left: 50%;
   text-wrap: nowrap;
+}
+
+.contentpanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1960px;
+  width: 1120px;
+  background-color: #495E57;
+  color: #F4CE14;
+  border-radius: 60;
 }
 
 .testimonials {
@@ -283,4 +317,48 @@ button {
   height: 25px;
   resize: both;
   margin-left: 20%;
+}
+
+.topblock {
+  display: flex;
+  background-color: #495E57;
+  color: #F4CE14;
+}
+
+.topblock h1 {
+  font-family: "Markazi Text";
+  font-weight: bold;
+  font-size: 64px;
+}
+.topblock h2 {
+  font-family: "Karla";
+  font-weight: normal;
+  font-size: 40px;
+}
+
+p {
+  font-family: "Karla";
+  font-size: medium;
+  font-weight: normal;
+}
+
+.backdrop {
+  background-color: #495E57;
+  height: 880px;
+  width: 560px;
+  border-radius: 10%;
+  resize: both;
+}
+
+.bookingform {
+  font-family: "Karla";
+  color: #F4CE14;
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px; 
+  gap: 20px;
 }

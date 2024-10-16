@@ -1,16 +1,27 @@
+import { Routes, Route, Link } from "react-router-dom";
+import BookingPage from "./BookinPage";
+import AboutUs from "./AboutUs";
+import Menu from "./Menu";
+
 function Nav () {
 
     return(
-    <nav>
-        <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Menu</a></li>
-        <li><a href="">Reservations</a></li>
-        <li><a href="">Order Online</a></li>
-        <li><a href="">Login </a></li>
-        </ul> 
-    </nav>
+    <div>
+        <nav>
+            <ul>
+                <li><Link to="/" className="link">Home</Link></li>
+                <li><Link to="/about" className="link">About</Link></li>
+                <li><Link to="/menu" className="link">Menu</Link></li>
+                <li><Link to="/booking" className="link">Reservations</Link></li>
+                <li><Link to="/" className="link">Order Online</Link></li>
+                <li><Link to="/" className="link">Login</Link></li>
+            </ul> 
+        </nav>
+        <Routes> 
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/booking" element={<BookingPage/>} />
+      </Routes>
+    </div>
     );
 }
 
