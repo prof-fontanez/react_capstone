@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BookingPage from "./BookinPage";
 import AboutUs from "./AboutUs";
 import Menu from "./Menu";
@@ -17,10 +17,6 @@ function Nav () {
                 <li><Link to="/" className="link">Login</Link></li>
             </ul> 
         </nav>
-        <Routes> 
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/booking" element={<BookingPage/>} />
-      </Routes>
     </div>
     );
 }
