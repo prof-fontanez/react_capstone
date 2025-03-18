@@ -1,9 +1,7 @@
 import './App.css';
-import BookingPage from './BookinPage';
-import Header from './Header';
+import BookingPage from './BookingPage';
 import Main from './Main';
 import Menu from './Menu';
-import Nav from './Nav';
 import { Routes, Route } from "react-router-dom";
 import "@fontsource/karla"
 import "@fontsource/markazi-text";

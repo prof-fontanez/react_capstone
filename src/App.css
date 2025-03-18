@@ -5,12 +5,12 @@
   align-items: center;
 }
 
-/* body {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-} */
+}
 
 button {
   display: block;
@@ -23,6 +23,13 @@ button {
   font-family: "Karla";
   font-size: 14px;
   font-weight: bold;
+  margin-top: 10%;
+}
+
+.button:hover {
+  background-color:#c4a60f;
+  transition: 0.7s;
+  box-shadow: inset 0px 0px 2px 2px #6c6b6b;
 }
 
 .App-link {
@@ -216,6 +223,24 @@ button {
   text-wrap: nowrap;
 }
 
+.menu {
+  display: flex;
+  width: 1440px;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: auto;
+  resize: both;
+  margin-top: 5%;
+  aspect-ratio: inherit;
+}
+
 .contentpanel {
   display: flex;
   justify-content: center;
@@ -255,6 +280,14 @@ button {
   font-family: "Karla";
 }
 
+.review name {
+  margin-left: 5%;
+}
+
+.review rating {
+  margin-left: 5%;
+}
+
 .review comment {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -262,7 +295,7 @@ button {
   -webkit-line-clamp: 4;
   line-clamp: 4; /* Also define the standard property 'line-clamp' for compatibility */
   -webkit-box-orient: vertical;
-
+  margin-left: 5%;
 }
 
 .menuspecial {
@@ -321,8 +354,11 @@ button {
 
 .topblock {
   display: flex;
+  flex-direction: column;
   background-color: #495E57;
   color: #F4CE14;
+  width: inherit;
+  height: 400px;
 }
 
 .topblock h1 {
@@ -332,33 +368,53 @@ button {
 }
 .topblock h2 {
   font-family: "Karla";
+  color: #EDEFEE;
   font-weight: normal;
   font-size: 40px;
 }
 
 p {
+  display: flex;
   font-family: "Karla";
   font-size: medium;
   font-weight: normal;
+  color: #EDEFEE;
+  max-width: 800px;
 }
 
 .backdrop {
-  background-color: #495E57;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
   height: 880px;
-  width: 560px;
-  border-radius: 10%;
-  resize: both;
+  width: 800px;
+  border-radius: 5%;
+  margin-top: 5%;
+}
+
+.backdrop h1 {
+  font-family: "Markazi Text";
+  font-weight: bold;
+  font-size: 128px;
+  color: #333333;
+}
+
+.bookingpage {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  width: 1440px;
+  height: 800px;
 }
 
 .bookingform {
   font-family: "Karla";
-  color: #F4CE14;
   font-size: large;
   font-weight: bold;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 200px; 
+  max-width: 400px; 
   gap: 20px;
 }

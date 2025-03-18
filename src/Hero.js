@@ -7,7 +7,7 @@ const Hero =  props => (
     <div className="hero">
         <div className="hero_container">
             <h2>This weeks specials!</h2>
-            <button>Online menu</button>
+            <button className="button">Online menu</button>
         </div>
         <div className="hero_container">
             <MenuSpecial image={bruchetta} price='$12.99' title='Bruchetta' description="The famous greek salad of crispy lettuce, peppers, olives and our Chicago style Feta Cheese, garnished with crunchy garlic and Rosemary Croutons." />

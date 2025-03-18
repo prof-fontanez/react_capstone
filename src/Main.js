@@ -12,7 +12,6 @@ function Main () {
         <Hero />
         <Testimonials />
         <AboutUs />
-        <Footer />
     </>
     );
 }
