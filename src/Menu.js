@@ -1,4 +1,3 @@
-import TopBlock from "./TopBlock";
 import menu1 from './assets/images/menu1.png';
 import menu2 from './assets/images/menu2.png';
 
