@@ -42,7 +42,7 @@ button {
   color: #333333;
   font-family: "Karla";
   width: 1440px;
-  height: 400px;
+  height: 800px;
   justify-content: center;
   align-items: center;
 }
@@ -418,3 +418,23 @@ p {
   max-width: 400px; 
   gap: 20px;
 }
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1440px;
+  height: 800px;
+  border-radius: 5%;
+  margin-top: 5%;
+
+
+}
+
+.confirmation h1 {
+  font-family: "Markazi Text";
+  font-weight: bold;
+  font-size: 64px;
+  color: #333333;
+}
+

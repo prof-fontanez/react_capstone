@@ -1,33 +1,25 @@
 
 import { useState } from "react";
-import Confirmation from "./Confirmation";
+import { useNavigate } from "react-router-dom";
 
 const BookingForm = props => {
-    const [isConfirmationOpen, setConfirmationOpen] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [people, setPeople] = useState(1);
     const [date, setDate] = useState("");
+    const [times, setTimes] = useState("")
     const [occasion, setOccasion] = useState("None");  
-    const [finalTime, setFinalTime] = useState("");
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
-        setConfirmationOpen(true);
+        props.submitForm(e);
+        navigate('/confirmation');
     }
 
     function handleDateChange(e) {
-        setDate(e.target.value);
-    }
-
-    function handleConfirmationClosed() {
-        setConfirmationOpen(false);
-        setName("");
-        setEmail("");
-        setPeople(1);
-        setDate("");
-        setOccasion("None");
-        setFinalTime("");
+        setDate(e);
+        props.dispatch(e);
     }
 
     return (
@@ -67,12 +59,13 @@ const BookingForm = props => {
                     <label htmlFor="res-date">Choose date</label>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <input type="date" 
-                        id="res-date"
-                        required
-                        value={date}
+                    <input 
+                        id="res-date" 
+                        value={date} 
                         width='200px'
-                        onChange={handleDateChange}/>
+                        onChange={(e) => handleDateChange(e.target.value)} 
+                        type="date" 
+                        required/>
                 </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="res-time">Choose time</label>
@@ -80,21 +73,11 @@ const BookingForm = props => {
                 <div style={{ display: 'flex', alignItems: 'center'}}>
                     <select 
                         id="res-time" 
-                        required width='200px' 
-                        value={finalTime}
-                        onChange={(e) => setFinalTime(e.target.value)}>
-                            <option>17:00</option>
-                            <option>17:30</option>
-                            <option>18:00</option>
-                            <option>18:30</option>
-                            <option>19:00</option>
-                            <option>19:30</option>
-                            <option>20:00</option>
-                            <option>20:30</option>
-                            <option>21:00</option>
-                            <option>21:30</option>
-                            <option>22:00</option>
-                            <option>22:30</option>
+                        required 
+                        width='200px' 
+                        value={times}
+                        onChange={(e) => setTimes(e.target.value)}>
+                            {props?.availableTimes?.availableTimes?.map(availableTimes => {return <option key={availableTimes}>{availableTimes}</option>})}
                     </select>
                 </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -133,17 +116,6 @@ const BookingForm = props => {
                 onClick={(e) => handleSubmit(e)}>Make your reservation
             </button>
         </div>
-        
-        {isConfirmationOpen && (
-            <Confirmation onClose={() => handleConfirmationClosed()}>
-                <h1>Reservation completed!</h1>
-                <div>Name: {name}</div>
-                <div>Number of guests: {people}</div>
-                <div>Occasion: {occasion}</div>
-                <div>Date: {date}</div>
-                <div>Time: {finalTime}</div>
-            </Confirmation>
-        )}
     </>
 )};
 
