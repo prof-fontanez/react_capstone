@@ -32,6 +32,7 @@ const BookingForm = props => {
                 </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <input type="text" 
+                        aria-label="Name"
                         id="name" 
                         placeholder="Enter your name"
                         required
@@ -46,6 +47,7 @@ const BookingForm = props => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input type="email" 
+                        aria-label="Email"
                         id="email"
                         placeholder="Email"
                         value={email}
@@ -61,6 +63,7 @@ const BookingForm = props => {
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input 
                         id="res-date" 
+                        aria-label="Choose a date"
                         value={date} 
                         width='200px'
                         onChange={(e) => handleDateChange(e.target.value)} 
@@ -73,11 +76,12 @@ const BookingForm = props => {
                 <div style={{ display: 'flex', alignItems: 'center'}}>
                     <select 
                         id="res-time" 
+                        aria-label="Select a time"
                         required 
                         width='200px' 
                         value={times}
                         onChange={(e) => setTimes(e.target.value)}>
-                            {props?.availableTimes?.availableTimes?.map(availableTimes => {return <option key={availableTimes}>{availableTimes}</option>})}
+                            {props?.availableTimes?.availableTimes?.map(availableTimes => {return <option aria-label={availableTimes} key={availableTimes}>{availableTimes}</option>})}
                     </select>
                 </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -86,6 +90,7 @@ const BookingForm = props => {
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input type="number" 
                         id="guests" 
+                        aria-label="Select number of guests"
                         value={people}
                         required
                         min={1}
@@ -99,19 +104,21 @@ const BookingForm = props => {
                 <div style={{ display: 'flex'}}>
                     <select id="occasion"
                         required
+                        aria-label="Select an occasion"
                         placeholder="Select an occasion"
                         value={occasion}
                         width={200}
                         onChange={(e) => setOccasion(e.target.value)}>
-                            <option>None</option>
-                            <option>Birthday</option>
-                            <option>Anniversary</option>
-                            <option>Engagement</option>
-                            <option>Other</option>
+                            <option aria-label="None">None</option>
+                            <option aria-label="Birthday">Birthday</option>
+                            <option aria-label="Anniversary">Anniversary</option>
+                            <option aria-label="Engagement">Engagement</option>
+                            <option aria-label="Other occassion">Other</option>
                     </select>
                 </div>
             </form>
             <button 
+                aria-label="Click to complete your reservation"
                 className="button" 
                 disabled={!name || !email || !date}
                 onClick={(e) => handleSubmit(e)}>Make your reservation
