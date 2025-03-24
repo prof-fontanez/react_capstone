@@ -32,6 +32,13 @@ button {
   box-shadow: inset 0px 0px 2px 2px #6c6b6b;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .App-link {
   color: #61dafb;
 }

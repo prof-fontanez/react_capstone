@@ -113,6 +113,7 @@ const BookingForm = props => {
             </form>
             <button 
                 className="button" 
+                disabled={!name || !email || !date}
                 onClick={(e) => handleSubmit(e)}>Make your reservation
             </button>
         </div>
