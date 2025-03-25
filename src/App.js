@@ -5,65 +5,121 @@ import Menu from './Menu';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from './Layout';
 import AboutUs from './AboutUs';
-import  { useReducer } from "react";
+import { useReducer, useEffect, useState } from "react";
 import ConfirmedBooking from './ConfirmedBooking';
 
-
 function App() {
-  
-  const seededRandom = function (seed) {
-    var m = 2**35 - 31;
-    var a = 185852;
-    var s = seed % m;
-    return function () {
-      return (s = s * a % m) / m;
+    const [fetchAPI, setFetchAPI] = useState(null);
+    const [submitAPI, setSubmitAPI] = useState(null);
+
+    useEffect(() => {
+        fetch("https://raw.githubusercontent.com/courseraap/capstone/main/api.js")
+            .then(response => response.text())
+            .then(scriptContent => {
+              try {
+                let extractedFetchAPI, extractedSubmitAPI;
+
+                // Create a wrapper to extract the functions
+                const scriptWrapper = `(function() {
+                    ${scriptContent}
+                    return { fetchAPI, submitAPI };
+                })()`;
+
+                // Execute and extract functions
+                const extractedFunctions = eval(scriptWrapper);
+                extractedFetchAPI = extractedFunctions.fetchAPI;
+                extractedSubmitAPI = extractedFunctions.submitAPI;
+
+                // Set state if functions exist
+                if (typeof extractedFetchAPI === "function" && typeof extractedSubmitAPI === "function") {
+                    setFetchAPI(() => extractedFetchAPI);
+                    setSubmitAPI(() => extractedSubmitAPI);
+                    console.log("✅ API functions loaded successfully.");
+                } else {
+                    console.error("❌ API functions not found.");
+                }
+            } catch (error) {
+                console.error("❌ Error evaluating script:", error);
+            }
+            })
+            .catch(error => console.error("Failed to load script:", error));
+    }, []);
+
+    const handleFetch = async (date) => {
+        if (fetchAPI) {
+            try {
+                const data = await fetchAPI(date);
+                console.log("Fetched Data:", data);
+                return data;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return null;
+            }
+        } else {
+            console.error("fetchAPI is not available");
+            return null;
+        }
     };
-  }
 
-  const fetchAPI = function(date) {
-      let result = [];
-      let random = seededRandom(date.getDate());
+    const handleSubmit = async (formData) => {
+        if (submitAPI) {
+            try {
+                const response = await submitAPI(formData);
+                console.log("Submit Response:", response);
+                return response;
+            } catch (error) {
+                console.error("Error submitting data:", error);
+                return null;
+            }
+        } else {
+            console.error("submitAPI is not available");
+            return null;
+        }
+    };
 
-      for(let i = 17; i <= 23; i++) {
-          if(random() < 0.5) {
-              result.push(i + ':00');
-          }
-          if(random() < 0.5) {
-              result.push(i + ':30');
-          }
-      }
-      return result;
-  };
-  const submitAPI = function(formData) {
-      return true;
-  };
+    function updateTimes(state, action) {
+      console.log("Action: ", action);
+      console.log("State: ", state);
+        if (action.type === "SET_TIMES") {
+            return { availableTimes: action.payload };
+        }
 
-  const initialState = {availableTimes:  fetchAPI(new Date())}
-  const [state, dispatch] = useReducer(updateTimes, initialState);
+        return {availableTimes: fetchAPI(new Date(action))};
+    }
 
-  function updateTimes(state, date) {
-      return {availableTimes: fetchAPI(new Date(date))}
-  }
-  const navigate = useNavigate();
-  function submitForm (formData) {
-      if (submitAPI(formData)) {
-          navigate("/booking")
-      }
-  }
+    const [state, dispatch] = useReducer(updateTimes, { availableTimes: [] });
 
-return (
-    <>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Main/>} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/booking" element={<BookingPage availableTimes={state} dispatch={dispatch} submitForm={submitForm}/>} />
-          <Route path="/about" element={<AboutUs/>} />
-          <Route path='/confirmation' element={<ConfirmedBooking/>} />
-        </Route>
-      </Routes>
-    </>
-  );
+    useEffect(() => {
+        if (fetchAPI) {
+            handleFetch(new Date()).then(data => {
+                dispatch({ type: "SET_TIMES", payload: data });
+            });
+        }
+    }, [fetchAPI]);
+
+    const navigate = useNavigate();
+    
+    async function submitForm(formData) {
+        const response = await handleSubmit(formData);
+        console.log("handleSubmit response: ", response);
+        if (response) {
+            navigate("/confirmation");
+        }
+    }
+
+    return (
+        <>
+            <Routes>
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/menu" element={<Menu />} />
+                    <Route path="/booking" element={<BookingPage availableTimes={state} dispatch={dispatch} submitForm={submitForm} />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path='/confirmation' element={<ConfirmedBooking />} />
+                </Route>
+            </Routes>
+        </>
+    );
 }
 
 export default App;

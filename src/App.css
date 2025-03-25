@@ -419,7 +419,7 @@ p {
   font-size: large;
   font-weight: bold;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr 300px ;
   grid-template-rows: repeat(6, 1fr);
   flex-flow: column;
   max-width: 400px; 
@@ -445,3 +445,16 @@ p {
   color: #333333;
 }
 
+input:invalid {
+  border: 2px solid red;
+}
+
+input:valid {
+  border: 1px solid black;
+}
+
+.text-red-600 {
+  font-family: "Markazi Text";
+  font-size: small;
+  color: red;
+}

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BookingForm = props => {
@@ -10,6 +10,11 @@ const BookingForm = props => {
     const [times, setTimes] = useState("")
     const [occasion, setOccasion] = useState("None");  
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let currentDate = new Date().toJSON().slice(0, 10);
+        setDate(currentDate);
+    }, [])
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,6 +27,31 @@ const BookingForm = props => {
         props.dispatch(e);
     }
 
+    const [emailValid, setEmailValid] = useState(null);
+    const [nameValid, setNameValid] = useState(null);
+
+    const validateEmail = (email) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return regex.test(email);
+    };
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        setEmailValid(validateEmail(value));
+    };
+    
+    const validateName = (name) => {
+        const regex = /^[a-zA-Z\s'-]+$/;
+        return regex.test(name) && name.length >= 2 && name.length <= 50;
+    };
+  
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        setName(value);
+        setNameValid(validateName(value));
+    };
+      
     return (
     <>
         <div className="backdrop">
@@ -40,8 +70,13 @@ const BookingForm = props => {
                         maxLength={50}
                         value={name}
                         width='200px'
-                        onChange={(e) => setName(e.target.value)}/>
+                        onChange={(e) => handleNameChange(e)}/>
 				</div>
+                <div>
+                    {nameValid === null ? null : nameValid ? (<></>) : (
+                        <text className="text-red-600">Invalid name string. Alphanumeric characters only.</text>
+                    )}
+                </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="email">Email:</label>
                 </div>
@@ -52,10 +87,13 @@ const BookingForm = props => {
                         placeholder="Email"
                         value={email}
                         required
-                        minLength={4}
-                        maxLength={200}
                         width='200px'
-                        onChange={(e) => setEmail(e.target.value)}/>
+                        onChange={(e) => handleEmailChange(e)} />
+                </div>
+                <div>
+                    {emailValid === null ? null : emailValid ? (<></>) : (
+                    <text className="text-red-600">Invalid email address</text>
+                    )}
                 </div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="res-date">Choose date</label>
@@ -70,6 +108,7 @@ const BookingForm = props => {
                         type="date" 
                         required/>
                 </div>
+                <div/>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="res-time">Choose time</label>
                 </div>
@@ -84,6 +123,7 @@ const BookingForm = props => {
                             {props?.availableTimes?.availableTimes?.map(availableTimes => {return <option aria-label={availableTimes} key={availableTimes}>{availableTimes}</option>})}
                     </select>
                 </div>
+                <div/>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
                     <label htmlFor="guests">Number of guests</label>
                 </div>
@@ -98,6 +138,7 @@ const BookingForm = props => {
                         width='200px'
                         onChange={(e) => setPeople(e.target.value)}/>
                 </div>
+                <div/>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<label htmlFor="occasion">Occasion</label>
                 </div>
@@ -116,11 +157,12 @@ const BookingForm = props => {
                             <option aria-label="Other occassion">Other</option>
                     </select>
                 </div>
+                <div/>
             </form>
             <button 
                 aria-label="Click to complete your reservation"
                 className="button" 
-                disabled={!name || !email || !date}
+                disabled={!name || !nameValid || !email || !emailValid }
                 onClick={(e) => handleSubmit(e)}>Make your reservation
             </button>
         </div>
