@@ -3,6 +3,7 @@ import AboutUs from './AboutUs';
 import BookingPage from './BookingPage';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ConfirmedBooking from './ConfirmedBooking';
+import BookingForm from './BookingForm';
 
 test('Renders the AboutUs heading', () => {
   render(<AboutUs />);
@@ -80,3 +81,57 @@ describe('Verify Confirmation Page renders on form submission', () => {
     });
   });
 })
+
+test("Displays validation error message for invalid email", () => {
+  render(
+    <MemoryRouter>
+      <BookingPage />
+    </MemoryRouter>
+  );
+
+  const input = screen.getByPlaceholderText("Email");
+
+  // Enter an invalid email
+  fireEvent.change(input, { target: { value: "invalid-email" } });
+
+  // Check for validation error message
+  expect(screen.getByText("Invalid email address")).toBeInTheDocument();
+});
+
+test("Displays validation error message for invalid name", () => {
+  render(
+    <MemoryRouter>
+      <BookingPage />
+    </MemoryRouter>
+  );
+
+  const input = screen.getByPlaceholderText("Enter your name");
+
+  // Enter an invalid email
+  fireEvent.change(input, { target: { value: "123213213 werwerew" } });
+
+  // Check for validation error message
+  expect(screen.getByText("Invalid name string. Alphanumeric characters only.")).toBeInTheDocument();
+});
+
+test("Email error message does not show a message initially", () => {
+  render(
+    <MemoryRouter>
+      <BookingPage />
+    </MemoryRouter>
+  );
+
+  // Ensure no validation message is shown at first
+  expect(screen.queryByText(/Invalid email address/)).toBeNull();
+});
+
+test("Name error message does not show a message initially", () => {
+  render(
+    <MemoryRouter>
+      <BookingPage />
+    </MemoryRouter>
+  );
+
+  // Ensure no validation message is shown at first
+  expect(screen.queryByText(/Invalid name string. Alphanumeric characters only./)).toBeNull();
+});
